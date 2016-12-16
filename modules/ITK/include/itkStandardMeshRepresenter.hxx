@@ -181,7 +181,7 @@ StandardMeshRepresenter<TPixel, MeshDimension>::LoadRefLegacy(const H5::Group& f
     try {
         reader->Update();
     } catch (itk::MeshFileReaderException& e) {
-      boost::filesystem::remove(tmpfilename);
+        boost::filesystem::remove(tmpfilename);
         throw statismo::StatisticalModelException((std::string("Could not read file ") + tmpfilename).c_str());
     }
 
@@ -224,13 +224,6 @@ StandardMeshRepresenter<TPixel, MeshDimension>::PointToVector(const PointType& p
     }
     return v;
 
-}
-
-template <class TPixel, unsigned MeshDimension>
-typename StandardMeshRepresenter<TPixel, MeshDimension>::DatasetPointerType
-StandardMeshRepresenter<TPixel, MeshDimension>::DatasetToSample(DatasetConstPointerType ds) const {
-    // we don't do any alignment, but simply return a clone of the dataset
-    return this->CloneDataset(ds);
 }
 
 template <class TPixel, unsigned MeshDimension>

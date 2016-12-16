@@ -189,7 +189,7 @@ StandardImageRepresenter<TPixel, ImageDimension>::LoadRefLegacy(const H5::Group&
     try {
         reader->Update();
     } catch (itk::ImageFileReaderException& e) {
-      boost::filesystem::remove(tmpfilename);
+        boost::filesystem::remove(tmpfilename);
         throw statismo::StatisticalModelException((std::string("Could not read file ") + tmpfilename).c_str());
     }
     typename DatasetType::Pointer img = reader->GetOutput();
@@ -232,17 +232,6 @@ StandardImageRepresenter<TPixel, ImageDimension>::PointToVector(const PointType&
 
 
 
-template <class TPixel, unsigned ImageDimension>
-typename StandardImageRepresenter<TPixel, ImageDimension>::DatasetPointerType
-StandardImageRepresenter<TPixel, ImageDimension>::DatasetToSample(DatasetConstPointerType image) const {
-    // we don't do any alignment for images, but simply return a copy of the image
-
-    typename itk::ImageDuplicator<ImageType>::Pointer duplicator = itk::ImageDuplicator<ImageType>::New();
-    duplicator->SetInputImage(image);
-    duplicator->Update();
-    return duplicator->GetOutput();
-
-}
 
 template <class TPixel, unsigned ImageDimension>
 statismo::VectorType
